@@ -1,10 +1,12 @@
+import styles from './Timer.module.scss';
 
-const Timer = () => {
-
-  let hours = 0;
-  let minutes = 0;
-  let seconds = 0;
-  let miliseconds = 0;
+const Timer = props => {
+  
+  const miliseconds = props.time;
+  let correctMiliSec = miliseconds % 100;
+  let seconds = Math.floor((miliseconds/100) % 60);
+  let minutes = Math.floor((miliseconds/100/60) % 60);
+  let hours = Math.floor((miliseconds/100/60/60) % 24);
 
   if(hours<10){
     hours = '0' + hours
@@ -18,13 +20,13 @@ const Timer = () => {
     seconds = '0' + seconds
   }
 
-  if(miliseconds<10){
-    miliseconds = '0' + miliseconds
+  if(correctMiliSec<10){
+    correctMiliSec = '0' + correctMiliSec
   }
 
   return (
-    <span>{hours}:{minutes}:{seconds}:{miliseconds}</span>
-  );
+    <h3>{hours}:{minutes}:{seconds}:{correctMiliSec}</h3>
+  )
 };
 
 export default Timer;
